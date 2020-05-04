@@ -8,4 +8,4 @@ npm run start
 
 npm run test
 
-! remember to change things in src/config.json
+Remember to change things in src/config.json
