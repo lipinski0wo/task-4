@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment } from 'react'
+import { Provider } from 'react-redux'
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from 'react-router-dom'
+import configureStore from './store'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import Calculator from './components/Calculator/Calculator'
+import Users from './components/Users/Users'
+import Fixed from './components/Fixed/Fixed'
 
-export default App;
+const store = configureStore()
+
+const App = () => (
+  <Provider store={store}>
+    <Router>
+      <Fragment>
+        <Switch>
+          <Route exact path='/calculator' component={Calculator} />
+          <Route exact path='/users' component={Users} />
+          <Route render={() => <Redirect to='/calculator' />} />
+        </Switch>
+        <Fixed />
+      </Fragment>
+    </Router>
+  </Provider>
+)
+
+export default App
